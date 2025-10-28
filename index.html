@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Viewport : -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Control de Dispositivos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo-section">
+            
+                <div class="logo-text">Sistema de Control de Dispositivos</div>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">Dispositivos Dentro</div>
+                    <div class="stat-value" id="devicesInside">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Dispositivos Fuera</div>
+                    <div class="stat-value" id="devicesOutside">0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="tabs">
+            <div class="tab active" data-tab="register">Registrar Dispositivo</div>
+            <div class="tab" data-tab="list">Lista de Dispositivos</div>
+            <div class="tab" data-tab="history">Historial</div>
+        </div>
+
+        <!-- Formulario de registro de dispositivos -->
+        <div class="tab-content active" id="register-tab">
+            <h2>Registrar Nuevo Dispositivo</h2>
+            <form id="deviceForm">
+                <div class="form-group">
+                    <label for="deviceType">Tipo de dispositivo</label>
+                    <select id="deviceType" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Laptop">Laptop</option>
+                        <option value="Cámara">Cámara</option>
+                        <option value="Celular">Celular</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+                <div class="form-group" id="otherDeviceGroup" style="display: none;">
+                    <label for="deviceName">Especifique el dispositivo</label>
+                    <input type="text" id="deviceName">
+                </div>
+                <div class="form-group">
+                    <label for="deviceBrand">Marca / Modelo</label>
+                    <input type="text" id="deviceBrand" required>
+                </div>
+                <div class="form-group">
+                    <label for="serialNumber">Número de serie</label>
+                    <input type="text" id="serialNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="responsible">Nombre del responsable o proveedor</label>
+                    <input type="text" id="responsible" required>
+                </div>
+                <div class="form-group">
+                    <label for="reason">Motivo de entrada o salida</label>
+                    <textarea id="reason" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="movementType">Tipo de movimiento</label>
+                    <select id="movementType" required>
+                        <option value="">Seleccione...</option>
+                        <option value="entrada">Entrada</option>
+                        <option value="salida">Salida</option>
+                    </select>
+                </div>
+                <button type="submit">Registrar Dispositivo</button>
+            </form>
+        </div>
+
+         <!-- Reutilizacion de INDEX para lista de dispositivos -->
+        <div class="tab-content" id="list-tab">
+            <h2>Lista de Dispositivos</h2>
+            <div class="filters">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label for="statusFilter">Filtrar por estado:</label>
+                    <select id="statusFilter">
+                        <option value="todos">Todos</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="validado">Validado</option>
+                        <option value="entregado">Entregado</option>
+                    </select>
+                </div>
+                <button class="export-btn" id="exportBtn">Exportar a CSV</button>
+            </div>
+            <div class="table-container">
+                <table id="devicesTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Marca/Modelo</th>
+                            <th>N° Serie</th>
+                            <th>Responsable</th>
+                            <th>Motivo</th>
+                            <th>Fecha/Hora</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devicesTableBody">
+                        <!-- Los dispositivos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+         <!-- Reutilizacion de Index para Historial de movimientos -->
+        <div class="tab-content" id="history-tab">
+            <h2>Historial de Movimientos</h2>
+            <div class="table-container">
+                <table id="historyTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Marca/Modelo</th>
+                            <th>N° Serie</th>
+                            <th>Responsable</th>
+                            <th>Motivo</th>
+                            <th>Fecha/Hora</th>
+                            <th>Estado</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- El historial dinamico -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">Equipo #02 - Lizbeth SA de CV</div>
+                <div class="footer-text">Sistema de Control de Dispositivos - Universidad Politécnica Baja California</div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
